@@ -19,7 +19,7 @@ plugin can do, on Linux, macOS and Windows agents.
 
 ## Requirements
 
-- Jenkins 2.568.1 or newer (LTS), Java 17 or newer
+- Jenkins 2.568.1 or newer (LTS), which runs on Java 21 or newer
 - OpenArtifact 0.10.0 or newer (the release that ships `oa upload`, `oa bundle` and `oa promote`)
 - `oa` 0.10.0 or newer on the agent, or an installation the plugin downloads for you
 
