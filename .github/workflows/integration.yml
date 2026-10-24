@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: The OpenArtifact Authors
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Runs OaIntegrationTest against a real OpenArtifact release (server image + oa CLI). It needs a release that ships
+# `oa upload`, `oa bundle` and `oa promote` (0.10.0 or newer), so it is started by hand and weekly rather than on every
+# pull request.
+name: Integration
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: OpenArtifact release to test against (without the leading v)
+        default: "0.10.0"
+        required: true
+  schedule:
+    - cron: "17 4 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    name: real server + real oa
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Run against a real OpenArtifact
+        env:
+          OA_VERSION: ${{ inputs.version || '0.10.0' }}
+        run: ./src/test/integration/run.sh

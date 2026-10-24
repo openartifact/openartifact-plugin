@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: The OpenArtifact Authors
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+  <f:entry title="${%Server}" field="server">
+    <f:select/>
+  </f:entry>
+  <f:entry title="${%Name}" field="name">
+    <f:textbox/>
+  </f:entry>
+  <f:entry title="${%Version}" field="version">
+    <f:textbox/>
+  </f:entry>
+  <f:advanced>
+    <f:entry title="${%Installation}" field="installation">
+      <f:select/>
+    </f:entry>
+    <f:entry title="${%Description}" field="description">
+      <f:textbox/>
+    </f:entry>
+    <f:entry title="${%Pipeline}" field="pipeline">
+      <f:textbox/>
+    </f:entry>
+    <f:entry field="fromBuild">
+      <f:checkbox title="${%FromBuild}"/>
+    </f:entry>
+    <f:entry title="${%Artifacts}" field="artifacts">
+      <f:textarea/>
+    </f:entry>
+    <f:entry field="create">
+      <f:checkbox title="${%Create}" default="true"/>
+    </f:entry>
+    <f:entry field="seal">
+      <f:checkbox title="${%Seal}" default="true"/>
+    </f:entry>
+    <f:entry title="${%GpgKey}" field="gpgKey">
+      <f:textbox/>
+    </f:entry>
+  </f:advanced>
+</j:jelly>

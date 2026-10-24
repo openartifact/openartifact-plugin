@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: The OpenArtifact Authors
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+  <f:section title="${%OpenArtifact}">
+    <f:entry title="${%Servers}" help="/plugin/openartifact/help-servers.html">
+      <f:repeatableProperty field="servers" add="${%Add server}" header="${%Server}" minimum="0"/>
+    </f:entry>
+    <f:entry title="${%Default server}" field="defaultServerId">
+      <f:select/>
+    </f:entry>
+    <f:entry title="${%Default oa installation}" field="defaultInstallation">
+      <f:select/>
+    </f:entry>
+  </f:section>
+</j:jelly>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: The OpenArtifact Authors
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:l="/lib/layout">
+  <j:forEach var="u" items="${it.uploads}">
+    <j:choose>
+      <j:when test="${u.link != null}">
+        <a href="${u.link}" class="jenkins-badge oa-badge" tooltip="${%uploaded.tooltip(u.count, u.repo)}" data-tooltip-append-to-parent="true">
+          <img src="${resURL}${it.markUrl}" class="icon-sm" alt="OpenArtifact" height="14" width="14"/>
+          ${%uploaded.text(u.count, u.repo)}
+        </a>
+      </j:when>
+      <j:otherwise>
+        <span class="jenkins-badge oa-badge" tooltip="${%uploaded.tooltip(u.count, u.repo)}" data-tooltip-append-to-parent="true">
+          <img src="${resURL}${it.markUrl}" class="icon-sm" alt="OpenArtifact" height="14" width="14"/>
+          ${%uploaded.text(u.count, u.repo)}
+        </span>
+      </j:otherwise>
+    </j:choose>
+  </j:forEach>
+  <j:forEach var="p" items="${it.promotions}">
+    <j:choose>
+      <j:when test="${p.link != null}">
+        <a href="${p.link}" class="jenkins-badge oa-badge" tooltip="${%promoted.tooltip(p.bundle, p.version, p.stage)}" data-tooltip-append-to-parent="true">
+          <img src="${resURL}${it.markUrl}" class="icon-sm" alt="OpenArtifact" height="14" width="14"/>
+          ${%promoted.text(p.bundle, p.version, p.stage)}
+        </a>
+      </j:when>
+      <j:otherwise>
+        <span class="jenkins-badge oa-badge" tooltip="${%promoted.tooltip(p.bundle, p.version, p.stage)}" data-tooltip-append-to-parent="true">
+          <img src="${resURL}${it.markUrl}" class="icon-sm" alt="OpenArtifact" height="14" width="14"/>
+          ${%promoted.text(p.bundle, p.version, p.stage)}
+        </span>
+      </j:otherwise>
+    </j:choose>
+  </j:forEach>
+</j:jelly>

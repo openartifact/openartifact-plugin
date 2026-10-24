@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: The OpenArtifact Authors
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<FindBugsFilter>
+  <!--
+    Step executions hold their step in a transient field on purpose: the step is not needed after a restart, because
+    SynchronousNonBlockingStepExecution cancels the running execution on resume (the standard Jenkins idiom).
+  -->
+  <Match>
+    <Class name="~io\.jenkins\.plugins\.openartifact\.Oa(Upload|Bundle|Promote)Step\$Execution"/>
+    <Bug pattern="SE_TRANSIENT_FIELD_NOT_RESTORED"/>
+  </Match>
+  <!-- OaException keeps oa's parsed JSON for the caller in the same JVM only; it is diagnostic and never persisted. -->
+  <Match>
+    <Class name="io.jenkins.plugins.openartifact.OaException"/>
+    <Bug pattern="SE_TRANSIENT_FIELD_NOT_RESTORED"/>
+  </Match>
+  <!-- Descriptor.load() in the constructor is how Jenkins global configurations and descriptors restore their state. -->
+  <Match>
+    <Class name="~io\.jenkins\.plugins\.openartifact\.(OpenArtifactGlobalConfiguration|OaInstallation\$DescriptorImpl)"/>
+    <Bug pattern="MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR"/>
+  </Match>
+</FindBugsFilter>
