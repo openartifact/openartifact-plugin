@@ -1,0 +1,24 @@
+version = 1
+SPDX-PackageName = "OpenArtifact Jenkins plugin"
+SPDX-PackageSupplier = "The OpenArtifact Authors"
+SPDX-PackageDownloadLocation = "https://github.com/openartifact/openartifact-plugin"
+
+# Files that cannot carry comment headers.
+[[annotations]]
+path = [
+  "LICENSE",
+  "docs/images/*.png",
+  "src/main/webapp/images/*.png",
+  ".mvn/maven.config",
+  ".mvn/extensions.xml",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "The OpenArtifact Authors"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Brand mark (copied from openartifact/brand) keeps its own license.
+[[annotations]]
+path = ["src/main/webapp/images/openartifact-mark*.svg"]
+precedence = "override"
+SPDX-FileCopyrightText = "The OpenArtifact Authors"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
