@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: The OpenArtifact Authors
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+  <f:entry title="${%Server}" field="server">
+    <f:select/>
+  </f:entry>
+  <f:entry title="${%Repo}" field="repo">
+    <f:textbox/>
+  </f:entry>
+  <f:entry title="${%Files}" field="files">
+    <f:textarea/>
+  </f:entry>
+  <f:advanced>
+    <f:entry title="${%Installation}" field="installation">
+      <f:select/>
+    </f:entry>
+    <f:entry title="${%TargetPath}" field="targetPath">
+      <f:textbox/>
+    </f:entry>
+    <f:entry field="flat">
+      <f:checkbox title="${%Flat}"/>
+    </f:entry>
+    <f:entry title="${%Properties}" field="properties">
+      <f:textarea/>
+    </f:entry>
+  </f:advanced>
+</j:jelly>

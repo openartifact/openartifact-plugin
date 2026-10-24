@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: The OpenArtifact Authors
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:t="/lib/hudson">
+  <j:if test="${it.recorded}">
+    <t:summary icon="${it.markUrl}">
+      <div class="oa-summary">
+        <strong>${%OpenArtifact}</strong>
+        <st:include page="badge.jelly" it="${it}"/>
+        <j:forEach var="u" items="${it.uploads}">
+          <details class="oa-uploads" open="open">
+            <summary>
+              <j:choose>
+                <j:when test="${u.link != null}">
+                  ${%Uploaded} <a href="${u.link}">${u.repo}</a>: ${%artifacts(u.count)}
+                </j:when>
+                <j:otherwise>
+                  ${%Uploaded} ${u.repo}: ${%artifacts(u.count)}
+                </j:otherwise>
+              </j:choose>
+            </summary>
+            <table class="jenkins-table jenkins-table--small oa-artifacts">
+              <thead>
+                <tr><th>${%Path}</th><th>${%SHA-256}</th><th>${%Size}</th></tr>
+              </thead>
+              <tbody>
+                <j:forEach var="a" items="${u.artifacts}">
+                  <tr>
+                    <td>
+                      <j:choose>
+                        <j:when test="${a.link != null}"><a href="${a.link}">${a.path}</a></j:when>
+                        <j:otherwise>${a.path}</j:otherwise>
+                      </j:choose>
+                    </td>
+                    <td><code title="${a.sha256}">${a.shortSha256}</code></td>
+                    <td>${a.sizeText}</td>
+                  </tr>
+                </j:forEach>
+              </tbody>
+            </table>
+          </details>
+        </j:forEach>
+        <j:forEach var="b" items="${it.bundles}">
+          <div class="oa-bundle">
+            ${%Bundle}
+            <j:choose>
+              <j:when test="${b.link != null}"><a href="${b.link}">${b.name}@${b.version}</a></j:when>
+              <j:otherwise>${b.name}@${b.version}</j:otherwise>
+            </j:choose>
+            <j:if test="${!empty(b.state)}">&#160;(${b.state})</j:if>
+          </div>
+        </j:forEach>
+        <j:forEach var="p" items="${it.promotions}">
+          <div class="oa-promotion">
+            ${%Promoted}
+            <j:choose>
+              <j:when test="${p.link != null}"><a href="${p.link}">${p.bundle}@${p.version}</a></j:when>
+              <j:otherwise>${p.bundle}@${p.version}</j:otherwise>
+            </j:choose>
+            &#8594; <strong>${p.stage}</strong>
+            <j:if test="${!empty(p.targetRepo)}">&#160;(${%into} ${p.targetRepo})</j:if>
+          </div>
+        </j:forEach>
+      </div>
+    </t:summary>
+  </j:if>
+</j:jelly>

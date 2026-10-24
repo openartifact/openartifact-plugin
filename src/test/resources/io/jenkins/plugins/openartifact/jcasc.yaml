@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: The OpenArtifact Authors
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+unclassified:
+  openArtifact:
+    defaultServerId: prod
+    defaultInstallation: oa
+    servers:
+      - id: prod
+        url: https://artifacts.example.com/
+        credentialsId: oa-prod-token
+      - id: lab
+        url: http://localhost:8080
+
+tool:
+  oa:
+    installations:
+      - name: oa
+        properties:
+          - installSource:
+              installers:
+                - oa:
+                    version: "0.10.0"

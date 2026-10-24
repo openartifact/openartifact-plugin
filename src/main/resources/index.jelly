@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: The OpenArtifact Authors
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<?jelly escape-by-default='true'?>
+<div>
+  Upload artifacts to <a href="https://github.com/openartifact/openartifact">OpenArtifact</a>, group them into bundles
+  and promote releases from pipelines and freestyle jobs, with build badges that link back to OpenArtifact. Runs the
+  <code>oa</code> CLI on the build agent.
+</div>
