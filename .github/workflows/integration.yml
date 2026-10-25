@@ -2,12 +2,14 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Runs OaIntegrationTest against a real OpenArtifact release (server image + oa CLI). It needs a release that ships
-# `oa upload`, `oa bundle` and `oa promote` (0.10.0 or newer), so it is started by hand and weekly rather than on every
-# pull request.
+# Runs OaIntegrationTest against a real OpenArtifact release (server image + oa CLI, 0.10.0 or newer). It is a
+# required check on pull requests; the weekly run catches breakage from new OpenArtifact releases.
 name: Integration
 
 on:
+  pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       version:
